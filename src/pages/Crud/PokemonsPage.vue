@@ -233,23 +233,17 @@ export default {
           life: 3000
         });
       }
-
-      this.createHasInverter = false;
     },
 
     openEditDialog(selectedData) {
       this.editFormData = {...selectedData};
-      this.editHasInverter = selectedData.has_inverter === 'yes';
       this.showEditDialog = true;
     },
 
     async editData() {
 
-      this.editFormData.has_inverter = this.editHasInverter;
-
       try {
 
-        console.log(this.editFormData);
         const response = await this.apiService.update(this.editFormData.id, this.editFormData);
 
         this.$toast.add({
@@ -259,8 +253,6 @@ export default {
           life: 3000
         });
 
-        response.data.has_inverter = response.data.has_inverter ? 'yes' : 'no';
-        response.data.description = response.data.description || 'No description';
         this.tableData.splice(this.tableData.findIndex(item => item.id === response.data.id), 1, response.data);
 
         this.showEditDialog = false;
@@ -322,23 +314,4 @@ export default {
 
 <style scoped lang="scss">
 @import '../../assets/demo/styles/badges.scss';
-
-.status {
-  border-radius: 2px;
-  padding: .25em .5rem;
-  text-transform: uppercase;
-  font-weight: 700;
-  font-size: 12px;
-  letter-spacing: .3px;
-}
-
-.status.status-yes {
-  background-color: #C8E6C9;
-  color: #256029;
-}
-
-.status.status-no {
-  background-color: #FFCDD2;
-  color: #C63737;
-}
 </style>

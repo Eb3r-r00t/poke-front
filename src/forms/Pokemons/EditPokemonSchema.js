@@ -5,16 +5,38 @@ export default function () {
             label: 'Name',
             name: 'name',
             placeholder: "Type the name",
-            validation: "required",
-            "validation-visibility":"blur"
         },
         {
-            $formkit: 'textarea',
-            label: 'Description',
-            name: 'description',
-            placeholder: "Type the description",
-            validation: "required",
-            "validation-visibility":"blur"
-        }
+            $formkit: 'text',
+            label: 'Type',
+            name: 'type',
+            placeholder: "Select the type ",
+        },
+        {
+            $formkit: 'number',
+            label: 'HP',
+            name: 'hp',
+            placeholder: "Insert the hp",
+        },
+        {
+            $formkit: 'number',
+            label: 'Agility',
+            name: 'agility',
+            placeholder: "Insert the agility",
+        },
+        {
+            $formkit: 'number',
+            label: 'Attack',
+            name: 'attack',
+            step: 0.01,
+            placeholder: "Insert the attack",
+        },
+        {
+            $formkit: 'number',
+            label: 'Defense',
+            name: 'defense',
+            step: 0.01,
+            placeholder: "Insert the defense",
+        },
     ]
 }
