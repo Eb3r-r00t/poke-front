@@ -74,112 +74,12 @@ export default {
             {label: 'Dashboard', icon: 'fa fa-home', to: '/'}
           ]
         },
-        // {
-        // 	label: 'UI Kit', icon: 'pi pi-fw pi-sitemap',
-        // 	items: [
-        // 		{label: 'Form Layout', icon: 'pi pi-fw pi-id-card', to: '/formlayout'},
-        // 		{label: 'Input', icon: 'pi pi-fw pi-check-square', to: '/input'},
-        // 		{label: "Float Label", icon: "pi pi-fw pi-bookmark", to: "/floatlabel"},
-        // 		{label: "Invalid State", icon: "pi pi-fw pi-exclamation-circle", to: "/invalidstate"},
-        // 		{label: 'Button', icon: 'pi pi-fw pi-mobile', to: '/button', class: 'rotated-icon'},
-        // 		{label: 'Table', icon: 'pi pi-fw pi-table', to: '/table'},
-        // 		{label: 'List', icon: 'pi pi-fw pi-list', to: '/list'},
-        // 		{label: 'Tree', icon: 'pi pi-fw pi-share-alt', to: '/tree'},
-        // 		{label: 'Panel', icon: 'pi pi-fw pi-tablet', to: '/panel'},
-        // 		{label: 'Overlay', icon: 'pi pi-fw pi-clone', to: '/overlay'},
-        // 		{label: "Media", icon: "pi pi-fw pi-image", to: "/media"},
-        // 		{label: 'Menu', icon: 'pi pi-fw pi-bars', to: '/menu'},
-        // 		{label: 'Message', icon: 'pi pi-fw pi-comment', to: '/messages'},
-        // 		{label: 'File', icon: 'pi pi-fw pi-file', to: '/file'},
-        // 		{label: 'Chart', icon: 'pi pi-fw pi-chart-bar', to: '/chart'},
-        // 		{label: 'Misc', icon: 'pi pi-fw pi-circle-off', to: '/misc'},
-        // 	]
-        // },
-        // {
-        // 	label: "Utilities", icon:'pi pi-fw pi-globe',
-        // 	items: [
-        // 		{label: 'Display', icon:'pi pi-fw pi-desktop', to:'/display'},
-        // 		{label: 'Elevation', icon:'pi pi-fw pi-external-link', to:'/elevation'},
-        // 		{label: 'Flexbox', icon:'pi pi-fw pi-directions', to:'/flexbox'},
-        // 		{label: 'Icons', icon:'pi pi-fw pi-prime', to:'/icons'},
-        // 		{label: 'Widgets', icon:'pi pi-fw pi-star', to:'/widgets'},
-        // 		{label: 'Grid System', icon:'pi pi-fw pi-th-large', to:'/grid'},
-        // 		{label: 'Spacing', icon:'pi pi-fw pi-arrow-right', to:'/spacing'},
-        // 		{label: 'Typography', icon:'pi pi-fw pi-align-center', to:'/typography'},
-        // 		{label: 'Text', icon:'pi pi-fw pi-pencil', to:'/text'},
-        // 	]
-        // },
-        // {
-        // 	label: "UI Blocks", icon: "pi pi-building",
-        // 	items: [
-        // 		{label: "Free Blocks", icon: "pi pi-fw pi-eye", to: "/blocks", badge: "NEW"},
-        // 		{label: "All Blocks", icon: "pi pi-fw pi-globe", url: "https://www.primefaces.org/primeblocks-vue"}
-        // 	]
-        // },
         {
-          label: 'Products', icon: 'pi pi-fw pi-align-left',
+          label: 'Manage', icon: 'pi pi-fw pi-clone',
           items: [
-            {
-              label: 'Inverters', icon: 'fa fa-bolt', to: '/inverters',
-            },
-            {
-              label: 'Modules', icon: 'fa fa-solar-panel', to: '/modules',
-            },
-            {
-              label: 'Structures', icon: 'fa fa-compass-drafting', to: '/structures',
-            },
-            {
-              label: 'Transformers', icon: 'fa fa-charging-station', to: '/transformers',
-            },
-            {
-              label: 'Others', icon: 'fa fa-angles-right',
-              items: [
-                {
-                  label: 'String Box', icon: 'fa fa-shield-halved', to: '/string_box',
-                },
-                {
-                  label: 'Connectors', icon: 'fa fa-plug', to: '/connectors',
-                },
-                {
-                  label: 'Cables', icon: 'fa fa-grip-lines', to: '/cables',
-                },
-              ]
-            }
+            {label: 'Pokemons', icon: 'fa fa-fire', to: '/pokemons'}
           ]
         },
-        {
-          label: 'Configs', icon: 'pi pi-fw pi-clone',
-          items: [
-            {label: 'Users', icon: 'fa fa-user', to: '/users'},
-            {label: 'Brands', icon: 'fa fa-bag-shopping', to: '/brands'},
-            {label: 'Product Categories', icon: 'fa fa-sitemap', to: '/product_categories'},
-            {label: 'Structure Types', icon: 'fa fa-layer-group', to: '/structure_types'},
-            // {label: 'Rigs', icon: 'pi pi-fw pi-desktop', to: '/rigs'},
-            // {label: 'Gpus', icon: 'pi pi-fw pi-server', to: '/gpus'},
-            // {label: 'Calendar', icon: 'pi pi-fw pi-calendar-plus', to: '/calendar'},
-            // {label: 'Timeline', icon: 'pi pi-fw pi-calendar', to: '/timeline'},
-            // {label: 'Landing', icon: 'pi pi-fw pi-user-plus', url: 'pages/landing.html', target: '_blank'},
-            // {label: 'Login', icon: 'pi pi-fw pi-sign-in', to: '/login'},
-            // {label: 'Invoice', icon: 'pi pi-fw pi-dollar', to: '/invoice'},
-            // {label: 'Help', icon: 'pi pi-fw pi-question-circle', to: '/help'},
-            // {label: 'Wizard', icon: 'pi pi-fw pi-star-fill', to: '/wizard'},
-            // {label: 'Error', icon: 'pi pi-fw pi-times-circle', to: '/error'},
-            // {label: 'Not Found', icon: 'pi pi-fw pi-exclamation-circle', to: '/notfound'},
-            // {label: 'Access Denied', icon: 'pi pi-fw pi-lock', to: '/access'},
-            // {label: 'Empty', icon: 'pi pi-fw pi-circle-off', to: '/empty'}
-          ]
-        },
-        // {
-        // 	label: 'Get Started', icon: 'pi pi-fw pi-download',
-        // 	items: [
-        // 		{
-        // 			label: 'Documentation', icon: 'pi pi-fw pi-file',to: '/documentation'
-        // 		},
-        // 		{
-        // 			label: 'Buy Now', icon: 'pi pi-fw pi-money-bill', url: ['https://www.primefaces.org/store']
-        // 		}
-        // 	]
-        // }
       ]
     }
   },

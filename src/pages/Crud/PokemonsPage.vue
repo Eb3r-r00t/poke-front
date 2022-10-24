@@ -16,7 +16,8 @@
                     :paginator="true" :rows="10" :rowsPerPageOptions="[10, 25, 50]"
                     paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                    v-model:filters="filters" filterDisplay="menu" :globalFilterFields="['name', 'description']"
+                    v-model:filters="filters" filterDisplay="menu"
+                    :globalFilterFields="['name', 'type', 'hp', 'attack', 'defense', 'agility']"
                     responsiveLayout="scroll"
         >
           <template #header>
@@ -48,21 +49,39 @@
             </template>
           </Column>
 
-          <Column field="description" header="Description" sortable style="max-width: 28rem">
+          <Column field="type" header="Type" sortable style="max-width: 28rem">
             <template #body="{ data }">
-              {{ data.description }}
+              {{ data.type }}
             </template>
             <template #filter="{ filterModel }">
               <InputText v-model="filterModel.value" type="text" class="p-column-filter" placeholder="Search by name"/>
             </template>
           </Column>
 
-          <Column field="has_inverter" header="Has Inverter" sortable :filterMenuStyle="{ width: '14rem' }"
-                  style="min-width: 10rem">
+          <Column field="hp" header="HP" sortable dataType="numeric" style="min-width: 8rem">
             <template #body="{ data }">
-              <span :class="'status status-' + data.has_inverter">{{ data.has_inverter }}</span>
+              {{ data.hp }}
             </template>
           </Column>
+
+          <Column field="agility" header="Agility" sortable dataType="numeric" style="min-width: 8rem">
+            <template #body="{ data }">
+              {{ data.agility }}
+            </template>
+          </Column>
+
+          <Column field="attack" header="Attack" sortable dataType="numeric" style="min-width: 8rem">
+            <template #body="{ data }">
+              {{ data.attack }}
+            </template>
+          </Column>
+
+          <Column field="defense" header="Defense" sortable dataType="numeric" style="min-width: 8rem">
+            <template #body="{ data }">
+              {{ data.defense }}
+            </template>
+          </Column>
+
 
           <Column header="Actions" headerStyle="min-width: 4rem; text-align: center"
                   bodyStyle="text-align: center; overflow: visible">
@@ -87,10 +106,6 @@
         }"
           >
             <FormKitSchema :schema="createSchema"/>
-            <h6 class="mt-1 mb-1 text-black-alpha-80 "> Has inverter </h6>
-            <div class="mt-0 mb-2">
-              <InputSwitch v-model="createHasInverter"/>
-            </div>
           </FormKit>
         </Dialog>
 
@@ -100,16 +115,13 @@
               type="form"
               v-model="editFormData"
               submit-label="Send"
+              validation-visibility="blur"
               @submit="editData"
               :config="{
             classes: { wrapper: {'formkit-wrapper' : false } }
         }"
           >
             <FormKitSchema :schema="editSchema"/>
-            <h6 class="mt-1 mb-1 text-black-alpha-80 "> Has inverter </h6>
-            <div class="mt-0 mb-2">
-              <InputSwitch v-model="editHasInverter"/>
-            </div>
           </FormKit>
         </Dialog>
 
@@ -132,29 +144,26 @@
 <script>
 import DataTable from 'primevue/datatable';
 import {FilterMatchMode, FilterOperator} from "primevue/api";
-import CreateBrandSchema from "@/forms/Brand/CreateBrandSchema";
-import EditBrandSchema from "@/forms/Brand/EditBrandSchema";
-// import HandleNullValues from "@/helpers/HandleNullValues";
-// import HandleBoolean from "@/helpers/HandleBoolean";
+import CreatePokemonSchema from "@/forms/Pokemons/CreatePokemonSchema";
+import EditPokemonSchema from "@/forms/Pokemons/EditPokemonSchema";
 import CRUDService from "@/service/CRUDService";
 
 export default {
-  name: 'Brands',
+  name: 'Pokemons',
   components: {
     DataTable,
   },
   data() {
     return {
-      name: 'Brand',
-      namePlural: 'Brands',
+      name: 'Pokemon',
+      namePlural: 'Pokemons',
 
-      apiService: new CRUDService('brands'),
+      apiService: new CRUDService('pokemons'),
 
-      tableName: 'Manage Brands',
+      tableName: 'Manage Pokemons',
       tableData: [],
-      tableLoadingMessage: `Loading brands. Please wait ... `,
-      tableNotFoundMessage: 'No brand data found.',
-      statuses: ['yes', 'no'],
+      tableLoadingMessage: `Loading pokemon. Please wait ... `,
+      tableNotFoundMessage: 'No pokemon data found.',
 
       loading: false,
       selectedData: null,
@@ -162,21 +171,16 @@ export default {
       filters: {
         global: {value: null, matchMode: FilterMatchMode.CONTAINS},
         name: {operator: FilterOperator.AND, constraints: [{value: null, matchMode: FilterMatchMode.STARTS_WITH}]},
-        description: {
-          operator: FilterOperator.AND,
-          constraints: [{value: null, matchMode: FilterMatchMode.STARTS_WITH}]
-        },
+        type: {operator: FilterOperator.AND, constraints: [{value: null, matchMode: FilterMatchMode.STARTS_WITH}]},
       },
 
       showCreateDialog: false,
       createFormData: {},
-      createSchema: CreateBrandSchema(),
-      createHasInverter: false,
+      createSchema: CreatePokemonSchema(),
 
       showEditDialog: false,
       editFormData: {},
-      editSchema: EditBrandSchema(),
-      editHasInverter: false,
+      editSchema: EditPokemonSchema(),
 
       deleteDataDialog: false,
       dataToDelete: null,
@@ -192,12 +196,6 @@ export default {
     async refreshTable() {
       this.loading = true;
       const response = await this.apiService.getAll();
-      console.log(response);
-
-      this.tableData = response.data.map((item) => {
-        item.description = item.description || 'No description';
-        item.has_inverter = item.has_inverter ? 'yes' : 'no';
-      });
 
       this.tableData = response.data;
       this.loading = false;
@@ -206,11 +204,6 @@ export default {
     async createData() {
 
       try {
-
-        this.createFormData = {
-          ...this.createFormData,
-          has_inverter: this.createHasInverter
-        }
 
         const response = await this.apiService.create(this.createFormData);
 
@@ -221,8 +214,6 @@ export default {
           life: 3000
         });
 
-        response.data.has_inverter = response.data.has_inverter ? 'yes' : 'no';
-        response.data.description = response.data.description || 'No description';
         this.tableData.push(response.data);
 
         this.showCreateDialog = false;

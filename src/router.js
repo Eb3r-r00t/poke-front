@@ -12,6 +12,14 @@ const routes = [
         }
     },
     {
+        path: '/pokemons',
+        name: 'pokemons',
+        component: () => import('./pages/Crud/PokemonsPage.vue'),
+        meta: {
+            breadcrumb: [{ parent: 'Pages', label: 'Pokemons' }],
+        }
+    },
+    {
         path: '/formlayout',
         name: 'formlayout',
         component: () => import('./components/FormLayoutDemo.vue'),
@@ -253,14 +261,7 @@ const routes = [
             breadcrumb: [{ parent: 'Pages', label: 'Crud' }],
         },
     },
-    {
-        path: '/brands',
-        name: 'brands',
-        component: () => import('./pages/Crud/BrandsPage.vue'),
-        meta: {
-            breadcrumb: [{ parent: 'Pages', label: 'Brands' }],
-        }
-    },
+
     {
         path: '/structure_types',
         name: 'structure_types',

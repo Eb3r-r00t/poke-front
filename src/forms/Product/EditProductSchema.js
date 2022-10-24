@@ -17,7 +17,7 @@ export default function (brands) {
         {
             $formkit: 'select',
             name: "brand_id",
-            label: "Brand",
+            label: "Pokemons",
             placeholder: "Choose the brand",
             options: brands,
         }

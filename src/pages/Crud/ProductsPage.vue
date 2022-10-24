@@ -172,7 +172,7 @@ export default {
     async deleteProductCategory() {
       await this.ProductCategoryService.deleteProductCategory(this.product.id);
       this.deleteProductCategoryDialog = false;
-      this.$toast.add({severity:'success', summary: 'Successful', detail: 'Brand Deleted', life: 3000});
+      this.$toast.add({severity:'success', summary: 'Successful', detail: 'Pokemons Deleted', life: 3000});
       await this.updateTable();
     },
   }

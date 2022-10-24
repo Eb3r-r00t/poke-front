@@ -148,7 +148,7 @@ export default {
         if (product.brand) {
           product.brand = product.brand.name;
         } else {
-          product.brand = 'No Brand';
+          product.brand = 'No Pokemons';
         }
       });
       this.descriptions = response.data.map(item => {
