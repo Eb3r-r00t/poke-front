@@ -9,7 +9,7 @@ window.axios = axios;
 window.axios.interceptors.response.use(function (response) {
     return response;
 }, function (error) {
-    if (419 === error.response.status) {
+    if (401 === error.response.status) {
         store.dispatch('logout').then(() =>{
             router.push('/');
         });

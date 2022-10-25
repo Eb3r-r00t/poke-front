@@ -3,56 +3,76 @@
 		<div class="grid">
 			<div class="col-12 lg:col-6 xl:col-3">
 				<div class="overview-box sales">
-					<i class="overview-icon pi pi-dollar"></i>
-					<span class="overview-title">Sales</span>
-					<i class="overview-arrow pi pi-chevron-circle-up"></i>
-					<div class="overview-numbers">
-						$ 92,440
-					</div>
-					<div class="overview-subinfo">
-						21% more than yesterday
-					</div>
+          <div v-if="topPokemons">
+            <i class="overview-icon fa fa-heart"></i>
+            <span class="overview-title">Highest HP</span>
+            <i class="overview-arrow pi pi-chevron-circle-up"></i>
+            <div class="overview-numbers">
+              {{ topPokemons.highestHp.name }}
+            </div>
+            <div class="overview-subinfo">
+              {{ topPokemons.highestHp.hp }}
+            </div>
+          </div>
+          <div v-else>
+            <i class="pi pi-spin pi-spinner"></i>
+          </div>
 				</div>
 			</div>
-			<div class="col-12 lg:col-6 xl:col-3">
-				<div class="overview-box views">
-					<i class="overview-icon pi pi-search"></i>
-					<span class="overview-title">Views</span>
-					<i class="overview-arrow pi pi-chevron-circle-up"></i>
-					<div class="overview-numbers">
-						7029
-					</div>
-					<div class="overview-subinfo">
-						2% more than yesterday
-					</div>
-				</div>
-			</div>
-			<div class="col-12 lg:col-6 xl:col-3">
-				<div class="overview-box users">
-					<i class="overview-icon pi pi-users"></i>
-					<span class="overview-title">Users</span>
-					<i class="overview-arrow pi pi-chevron-circle-up"></i>
-					<div class="overview-numbers">
-						9522
-					</div>
-					<div class="overview-subinfo">
-						7% more than yesterday
-					</div>
-				</div>
-			</div>
-			<div class="col-12 lg:col-6 xl:col-3">
-				<div class="overview-box checkin">
-					<i class="overview-icon pi pi-map-marker"></i>
-					<span class="overview-title">Check-Ins</span>
-					<i class="overview-arrow pi pi-chevron-circle-up"></i>
-					<div class="overview-numbers">
-						4211
-					</div>
-					<div class="overview-subinfo">
-						18% more than yesterday
-					</div>
-				</div>
-			</div>
+      <div class="col-12 lg:col-6 xl:col-3">
+        <div class="overview-box views">
+          <div v-if="topPokemons">
+            <i class="overview-icon fa fa-bolt"></i>
+            <span class="overview-title">Highest Agility</span>
+            <i class="overview-arrow pi pi-chevron-circle-up"></i>
+            <div class="overview-numbers">
+              {{ topPokemons.highestAgility.name }}
+            </div>
+            <div class="overview-subinfo">
+              {{ topPokemons.highestAgility.agility }}
+            </div>
+          </div>
+          <div v-else>
+            <i class="pi pi-spin pi-spinner"></i>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 lg:col-6 xl:col-3">
+        <div class="overview-box users">
+          <div v-if="topPokemons">
+            <i class="overview-icon fa fa-fire-flame-curved"></i>
+            <span class="overview-title">Highest Attack</span>
+            <i class="overview-arrow pi pi-chevron-circle-up"></i>
+            <div class="overview-numbers">
+              {{ topPokemons.highestAttack.name }}
+            </div>
+            <div class="overview-subinfo">
+              {{ topPokemons.highestAttack.attack }}
+            </div>
+          </div>
+          <div v-else>
+            <i class="pi pi-spin pi-spinner"></i>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 lg:col-6 xl:col-3">
+        <div class="overview-box checkin">
+          <div v-if="topPokemons">
+            <i class="overview-icon fa fa-shield"></i>
+            <span class="overview-title">Highest Defense</span>
+            <i class="overview-arrow pi pi-chevron-circle-up"></i>
+            <div class="overview-numbers">
+              {{ topPokemons.highestDefense.name }}
+            </div>
+            <div class="overview-subinfo">
+              {{ topPokemons.highestDefense.defense }}
+            </div>
+          </div>
+          <div v-else>
+            <i class="pi pi-spin pi-spinner"></i>
+          </div>
+        </div>
+      </div>
 
 			<div class="col-12 lg:col-8">
 				<div class="card card-w-title statistics">
@@ -419,6 +439,7 @@
 </template>
 
 <script>
+import DashboardService from "@/service/DashboardService";
 // import ProductService from '../service/ProductService';
 import EventService from '../service/EventService';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -428,6 +449,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 export default {
 	data() {
 		return {
+      topPokemons: null,
 			chartData: {
 				labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
 				datasets: [
@@ -536,9 +558,12 @@ export default {
 	},
 	// productService: null,
 	eventService: null,
-	created() {
+	async created() {
 		// this.productService = new ProductService();
 		this.eventService = new EventService();
+    const response  = await DashboardService();
+    console.log(response.data)
+    this.topPokemons = response.data;
 	},
 	mounted() {
 		// this.productService.getProducts().then(data => this.products = data);
