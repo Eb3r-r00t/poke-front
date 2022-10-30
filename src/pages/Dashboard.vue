@@ -1,6 +1,6 @@
 <template>
-	<div class="layout-dashboard">
-		<div class="grid">
+  <div class="layout-dashboard">
+    <div class="grid">
       <div class="col-12 lg:col-6 xl:col-3">
         <div class="overview-box sales">
           <div v-if="topPokemons">
@@ -73,7 +73,7 @@
           </div>
         </div>
       </div>
-		</div>
+    </div>
     <div class="card">
       <div class="poke-card">
         <Carousel :value="pokemons" :numVisible="3" :numScroll="3">
@@ -82,7 +82,7 @@
           </template>
           <template #item="slotProps">
             <div class="pokemon-item">
-              <div class="pokemon-item-content">
+              <div class="pokemon-item-content" :style="'background-color:'+slotProps.data.color">
                 <div class="mb-4 mr-4 ml-4 flex align-items-center justify-content-between">
                   <h2 class="mb-0 ml-2">{{ slotProps.data.name }}</h2>
                   <div class="flex align-items-center justify-content-between">
@@ -91,24 +91,24 @@
                   </div>
                 </div>
                 <div class="mb-5">
-                  <img src="https://img.pokemondb.net/sprites/black-white/anim/normal/charizard.gif"
-                       :alt="slotProps.data.name" class="pokemon-image" />
+                  <img :src="slotProps.data.image"
+                       :alt="slotProps.data.name" class="pokemon-image"/>
                 </div>
                 <div>
-<!--                  <h6 class="mt-0 mb-3">${{ slotProps.data.price }}</h6>-->
-<!--                  <span :class="'product-badge status-' + slotProps.data.inventoryStatus.toLowerCase()">{{ slotProps.data.inventoryStatus }}</span>-->
+                  <!--                  <h6 class="mt-0 mb-3">${{ slotProps.data.price }}</h6>-->
+                  <!--                  <span :class="'product-badge status-' + slotProps.data.inventoryStatus.toLowerCase()">{{ slotProps.data.inventoryStatus }}</span>-->
                   <div class="flex align-items-center justify-content-around mt-5">
                     <div class="block">
                       <i class="pokemon-icon fa fa-fire-flame-curved"></i>
-                      <h2>{{slotProps.data.attack}}</h2>
+                      <h2>{{ slotProps.data.attack }}</h2>
                     </div>
                     <div class="block">
                       <i class="pokemon-icon fa fa-shield"></i>
-                      <h2>{{slotProps.data.defense}}</h2>
+                      <h2>{{ slotProps.data.defense }}</h2>
                     </div>
                     <div class="block">
                       <i class="pokemon-icon fa fa-bolt"></i>
-                      <h2>{{slotProps.data.agility}}</h2>
+                      <h2>{{ slotProps.data.agility }}</h2>
                     </div>
                   </div>
                 </div>
@@ -118,72 +118,62 @@
         </Carousel>
       </div>
     </div>
-	</div>
+  </div>
 </template>
 
 <script>
 import DashboardService from "@/service/DashboardService";
+
 export default {
   data() {
     return {
       topPokemons: null,
-      pokemons: [{
-        name: 'Bulbasaur',
-        hp: 45,
-        attack: 49,
-        defense: 49,
-        agility: 45
-      }, {
-        name: 'Ivysaur',
-        hp: 60,
-        attack: 62,
-        defense: 63,
-        agility: 60
-      }, {
-        name: 'Venusaur',
-        hp: 80,
-        attack: 82,
-        defense: 83,
-        agility: 80
-      }, {
-        name: 'Charmander',
-        hp: 39,
-        attack: 52,
-        defense: 43,
-        agility: 65
-      }, {
-        name: 'Charmeleon',
-        hp: 58,
-        attack: 64,
-        defense: 58,
-        agility: 80
-      }, {
-        name: 'Charizard',
-        hp: 78,
-        attack: 84,
-        defense: 78,
-        agility: 100
-      }],
+      loading: false,
+      pokemons: [],
+      color: [
+        {type: 'fire', color: '#FDDFDF'},
+        {type: 'grass', color: '#DEFDE0'},
+        {type: 'electric', color: '#FCF7DE'},
+        {type: 'water', color: '#DEF3FD'},
+      ]
     }
   },
   async created() {
-    const response  = await DashboardService();
-    this.topPokemons = response.data;
+    const response = await DashboardService();
+    this.topPokemons = {
+      highestHp: response.data.reduce((prev, current) => (prev.hp > current.hp) ? prev : current),
+      highestAgility: response.data.reduce((prev, current) => (prev.agility > current.agility) ? prev : current),
+      highestAttack: response.data.reduce((prev, current) => (prev.attack > current.attack) ? prev : current),
+      highestDefense: response.data.reduce((prev, current) => (prev.defense > current.defense) ? prev : current),
+    }
+    // map color
+    this.pokemons = response.data.map(pokemon => {
+      const color = this.color.find(c => c.type === pokemon.type);
+      pokemon.color = color.color;
+      return pokemon;
+    })
+    this.pokemons = response.data;
   },
 }
 </script>
 <style lang="scss" scoped>
 .pokemon-item {
-.pokemon-item-content {
-  border: 1px solid var(--surface-border);
-  border-radius: 5%;
-  margin: 0.3rem;
-  text-align: center;
-  padding: 1rem 0;
-  background-color: #e76950;
+  .pokemon-item-content {
+    border: 1px solid var(--surface-border);
+    border-radius: 5%;
+    margin: 0.3rem;
+    text-align: center;
+    padding: 1rem 0;
+  }
 }
-// make with background, rounded corners, and shadow
-.pokemon-icon{
+
+.pokemon-image {
+  width: 50%;
+  height: 16rem;
+  object-fit: contain;
+}
+
+.pokemon-icon {
   width: 1.8rem;
   height: 1.8rem;
   border-radius: 50%;
@@ -191,10 +181,5 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-.pokemon-image {
-  height: 50%;
-  width: 50%;
-}
 }
 </style>
