@@ -135,6 +135,21 @@ export default {
         {type: 'grass', color: '#DEFDE0'},
         {type: 'electric', color: '#FCF7DE'},
         {type: 'water', color: '#DEF3FD'},
+        {type: 'psychic', color: '#E6E0F8'},
+        {type: 'ice', color: '#E0F7FA'},
+        {type: 'dragon', color: '#F5B7B1'},
+        {type: 'dark', color: '#A9A9A9'},
+        {type: 'fairy', color: '#FCEAFF'},
+        {type: 'normal', color: '#F5F5F5'},
+        {type: 'fighting', color: '#E6E0F8'},
+        {type: 'flying', color: '#90d5e0'},
+        {type: 'poison', color: '#98D7A5'},
+        {type: 'ground', color: '#F4E7DA'},
+        {type: 'rock', color: '#c0bdbd'},
+        {type: 'bug', color: '#F8D5A3'},
+          // ghost is dark purple
+        {type: 'ghost', color: '#787794'},
+        {type: 'steel', color: '#F5F5F5'},
       ]
     }
   },
