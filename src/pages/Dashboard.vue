@@ -81,25 +81,35 @@
             <h5>Basic</h5>
           </template>
           <template #item="slotProps">
-            <div class="product-item">
-              <div class="product-item-content">
-                <div class="mb-3">
-<!--                  <img :src="'demo/images/product/' + slotProps.data.image" :alt="slotProps.data.name" class="product-image" />-->
+            <div class="pokemon-item">
+              <div class="pokemon-item-content">
+                <div class="mb-4 mr-4 ml-4 flex align-items-center justify-content-between">
+                  <h2 class="mb-0 ml-2">{{ slotProps.data.name }}</h2>
+                  <div class="flex align-items-center justify-content-between">
+                    <i class="pokemon-icon fa fa-heart mr-2"></i>
+                    <h2 class="m-0 mr-2">{{ slotProps.data.hp }}</h2>
+                  </div>
+                </div>
+                <div class="mb-5">
+                  <img src="https://img.pokemondb.net/sprites/black-white/anim/normal/charizard.gif"
+                       :alt="slotProps.data.name" class="pokemon-image" />
                 </div>
                 <div>
-                  <div class="mr-4 ml-4 flex align-items-center justify-content-between">
-                    <h4 class="mb-0 ml-2">{{ slotProps.data.name }}</h4>
-                    <div class="flex align-items-center justify-content-between">
-                      <i class="overview-icon fa fa-heart mr-2"></i>
-                      <h4 class="m-0 mr-2">{{ slotProps.data.hp }}</h4>
-                    </div>
-                  </div>
 <!--                  <h6 class="mt-0 mb-3">${{ slotProps.data.price }}</h6>-->
 <!--                  <span :class="'product-badge status-' + slotProps.data.inventoryStatus.toLowerCase()">{{ slotProps.data.inventoryStatus }}</span>-->
-                  <div class="car-buttons mt-5">
-                    <Button icon="pi pi-search" class="p-button p-button-rounded mr-2" />
-                    <Button icon="pi pi-star-fill" class="p-button-success p-button-rounded mr-2" />
-                    <Button icon="pi pi-cog" class="p-button-help p-button-rounded" />
+                  <div class="flex align-items-center justify-content-around mt-5">
+                    <div class="block">
+                      <i class="pokemon-icon fa fa-fire-flame-curved"></i>
+                      <h2>{{slotProps.data.attack}}</h2>
+                    </div>
+                    <div class="block">
+                      <i class="pokemon-icon fa fa-shield"></i>
+                      <h2>{{slotProps.data.defense}}</h2>
+                    </div>
+                    <div class="block">
+                      <i class="pokemon-icon fa fa-bolt"></i>
+                      <h2>{{slotProps.data.agility}}</h2>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -163,17 +173,28 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.product-item {
-.product-item-content {
+.pokemon-item {
+.pokemon-item-content {
   border: 1px solid var(--surface-border);
-  border-radius: 3px;
+  border-radius: 5%;
   margin: 0.3rem;
   text-align: center;
   padding: 1rem 0;
+  background-color: #e76950;
 }
-.product-image {
+// make with background, rounded corners, and shadow
+.pokemon-icon{
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pokemon-image {
+  height: 50%;
   width: 50%;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 }
 </style>
