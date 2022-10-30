@@ -6,7 +6,7 @@ const routes = [
         path: '/',
         name: 'dashboard',
         exact: true,
-        component: () => import('./components/Dashboard.vue'),
+        component: () => import('./pages/Dashboard.vue'),
         meta: {
             breadcrumb: [{ label: 'Dashboard' }],
         }
@@ -393,7 +393,7 @@ const routes = [
     {
         path: '/empty',
         name: 'empty',
-        component: () => import('./components/EmptyPage.vue'),
+        component: () => import('./pages/Dashboard.vue'),
         meta: {
             breadcrumb: [{ parent: 'Pages', label: 'Empty Page' }],
         },
