@@ -4,8 +4,9 @@
 
 - Check if node version is 14 Lts. 
 
-- npm uninstall vuex; npm install vuex@next --save
-
+```
+npm uninstall vuex; npm install vuex@next --save
+```
 ## Project setup
 ```
 npm install
