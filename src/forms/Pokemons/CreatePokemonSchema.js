@@ -35,18 +35,25 @@ export default function () {
             validation: "required",
         },
         {
+            $formkit: 'url',
+            label: 'Image',
+            name: 'image',
+            placeholder: "Type the image url",
+            validation: "required|url",
+        },
+        {
             $formkit: 'number',
             label: 'HP',
             name: 'hp',
             placeholder: "Insert the hp",
-            validation: "required",
+            validation: "required|between:0,100",
         },
         {
             $formkit: 'number',
             label: 'Agility',
             name: 'agility',
             placeholder: "Insert the agility",
-            validation: "required",
+            validation: "required|between:0,100",
         },
         {
             $formkit: 'number',
@@ -54,7 +61,7 @@ export default function () {
             name: 'attack',
             step: 0.01,
             placeholder: "Insert the attack",
-            validation: "required",
+            validation: "required|between:0,100",
         },
         {
             $formkit: 'number',
@@ -62,7 +69,7 @@ export default function () {
             name: 'defense',
             step: 0.01,
             placeholder: "Insert the defense",
-            validation: "required",
+            validation: "required|between:0,100",
         },
     ]
 }
