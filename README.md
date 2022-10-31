@@ -1,4 +1,10 @@
-# babylon
+# Poke Word 🚀🌎
+
+## Before start
+
+- Check if node version is 14 Lts. 
+
+- npm uninstall vuex; npm install vuex@next --save
 
 ## Project setup
 ```
