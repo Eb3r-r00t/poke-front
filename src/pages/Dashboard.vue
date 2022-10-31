@@ -84,7 +84,10 @@
             <div class="pokemon-item">
               <div class="pokemon-item-content" :style="'background-color:'+slotProps.data.color">
                 <div class="mb-4 mr-4 ml-4 flex align-items-center justify-content-between">
-                  <h2 class="mb-0 ml-2">{{ slotProps.data.name }}</h2>
+                  <div class="flex align-items-center justify-content-begin">
+                    <img alt="img" class="pokemon-icon mr-2" :src="getSvg(slotProps.data.type)" />
+                    <h2 class="mt-3">{{ slotProps.data.name }}</h2>
+                  </div>
                   <div class="flex align-items-center justify-content-between">
                     <i class="pokemon-icon fa fa-heart mr-2"></i>
                     <h2 class="m-0 mr-2">{{ slotProps.data.hp }}</h2>
@@ -147,9 +150,13 @@ export default {
         {type: 'ground', color: '#F4E7DA'},
         {type: 'rock', color: '#c0bdbd'},
         {type: 'bug', color: '#F8D5A3'},
-          // ghost is dark purple
         {type: 'ghost', color: '#787794'},
         {type: 'steel', color: '#F5F5F5'},
+      ],
+      svg:[
+        {type: 'fire', svg: '../../public/iconsType/fire.svg'},
+        {type: 'grass', svg: '../../public/iconsType/grass.svg'},
+        {type: 'electric', svg: '../../public/iconsType/electric.svg'},
       ]
     }
   },
@@ -167,8 +174,19 @@ export default {
       pokemon.color = color.color;
       return pokemon;
     })
+    // map svg
+    this.pokemons = response.data.map(pokemon => {
+      const svg = this.svg.find(c => c.type === pokemon.type);
+      pokemon.svg = svg.svg;
+      return pokemon;
+    })
     this.pokemons = response.data;
   },
+  methods: {
+    getSvg(svg) {
+      return require('../../public/iconsType/'+svg+'.svg');
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>
