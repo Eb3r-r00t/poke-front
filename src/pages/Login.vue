@@ -6,7 +6,7 @@
     <div class="login-content">
       <img src="layout/images/logo-black.png" alt="babylon-layout"/>
 
-      <h1><span>SIGN IN</span> TO MINER MANAGER</h1>
+      <h1><span>SIGN IN</span> TO  POKE WORD 🚀🌎</h1>
       <p>Welcome, please use the form to sign-in.</p>
 
       <div v-if="loginError" class="mb-2">

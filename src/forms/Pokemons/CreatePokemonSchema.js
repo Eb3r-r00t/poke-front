@@ -46,7 +46,7 @@ export default function () {
             label: 'HP',
             name: 'hp',
             placeholder: "Insert the hp",
-            validation: "required|between:0,100",
+            validation: " ",
         },
         {
             $formkit: 'number',
